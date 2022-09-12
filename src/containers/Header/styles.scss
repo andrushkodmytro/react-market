@@ -1,5 +1,37 @@
+@import '../../assets/styles/variables';
+
 .app-header {
   height: 100px;
-  background-color: red;
+  display: flex;
+  justify-content: center;
+  background-color: $main-color;
   color: green;
+
+  .app-header-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .app-nav-menu {
+    display: flex;
+    color: white;
+
+    a {
+      color: white;
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+
+      &:hover {
+        background-color: darken($main-color, 10);
+        cursor: pointer;
+      }
+    }
+  }
+
+  .app-header-logo {
+    margin-right: auto;
+    height: 70px;
+    width: 70px;
+  }
 }

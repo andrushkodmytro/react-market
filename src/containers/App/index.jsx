@@ -1,15 +1,19 @@
 import Header from '../Header';
+import { BrowserRouter } from 'react-router-dom';
 import Main from '../Main';
 import Footer from '../Footer';
+
 import './styles.scss';
 
 function App() {
   return (
-    <div className='app'>
-      <Header />
-      <Main />
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <div className='app'>
+        <Header />
+        <Main />
+        <Footer />
+      </div>
+    </BrowserRouter>
   );
 }
 
