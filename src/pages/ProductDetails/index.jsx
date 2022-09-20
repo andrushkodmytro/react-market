@@ -23,8 +23,14 @@ const ProductDetails = () => {
       <div className='product-details-img-container'>
         <img src={productData.image} alt='Product' />
       </div>
-      <h3>{productData.title}</h3>
-      <p>{productData.description}</p>
+      <div className='product-details-content'>
+        <h3 className='product-details-title'>{productData.title}</h3>
+        <p className='product-details-description'> {productData.description}</p>
+        <p className='product-details-price'>{productData.price}$</p>
+        <p>
+          {productData.rating.rate} <span>{productData.rating.count}</span>
+        </p>
+      </div>
     </div>
   );
 };

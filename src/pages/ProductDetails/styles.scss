@@ -1,14 +1,34 @@
 .product-details {
+  display: flex;
+
   .product-details-img-container {
     width: 400px;
     height: 400px;
     background-color: white;
     border-radius: 12px;
+    flex-shrink: 0;
 
     img {
       width: 100%;
       height: 100%;
       object-fit: contain;
+    }
+  }
+
+  .product-details-content {
+    padding: 0 24px;
+
+    .product-details-title {
+      font-size: 32px;
+    }
+
+    .product-details-description {
+      font-size: 20px;
+    }
+
+    .product-details-price {
+      font-size: 30px;
+      font-weight: 500;
     }
   }
 }

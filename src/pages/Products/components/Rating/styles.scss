@@ -1,0 +1,12 @@
+.rating-container {
+  padding-top: 20px;
+
+  svg {
+    height: 20px;
+    width: 20px;
+  }
+
+  .active {
+    fill: orange;
+  }
+}

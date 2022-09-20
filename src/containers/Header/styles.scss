@@ -16,6 +16,11 @@
     display: flex;
     color: white;
 
+    li {
+      display: flex;
+      align-items: center;
+    }
+
     a {
       color: white;
       text-decoration: none;
@@ -25,6 +30,28 @@
       &:hover {
         background-color: darken($main-color, 10);
         cursor: pointer;
+      }
+    }
+
+    .cart-container {
+      position: relative;
+      svg path {
+        fill: white;
+      }
+      &::after {
+        content: '2';
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        top: -4px;
+        right: -20px;
+        background-color: red;
+        border-radius: 50%;
+        font-size: 12px;
+        font-weight: 600;
       }
     }
   }
