@@ -19,14 +19,18 @@ const Filters = ({ sort, setSort, category, setCategory }) => {
   return (
     <div className='product-list-filters'>
       <select
-        value={category}
+        value={category || ''}
         onChange={(e) => {
           setCategory(e.target.value);
         }}
       >
         <option value={null}>All</option>
-        {categoryList.map((category) => {
-          return <option value={category}>{category}</option>;
+        {categoryList.map((category, index) => {
+          return (
+            <option key={index} value={category}>
+              {category}
+            </option>
+          );
         })}
       </select>
 

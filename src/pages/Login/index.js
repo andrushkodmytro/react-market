@@ -1,7 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import service from '../../api/services';
 import store from 'store2';
+import auth from '../../utils/auth';
 import './styles.scss';
 
 const REACT_APP_API_URL = 'http://localhost:8081/api';
@@ -30,6 +31,10 @@ export default function Login() {
         console.log(error);
       });
   };
+
+  if (auth.isAuthenticated()) {
+    return <Navigate replace to='/' />;
+  }
 
   return (
     <div className='login-page'>

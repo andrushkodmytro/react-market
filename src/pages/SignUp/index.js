@@ -1,6 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import axios from 'axios';
+import auth from '../../utils/auth';
 import './styles.scss';
 
 const REACT_APP_API_URL = 'http://localhost:8081/api';
@@ -23,6 +24,10 @@ export default function SignUp() {
         console.log(error);
       });
   };
+
+  if (auth.isAuthenticated()) {
+    return <Navigate replace to='/' />;
+  }
 
   return (
     <div className='sign-up'>

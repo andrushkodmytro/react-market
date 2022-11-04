@@ -19,8 +19,8 @@ const CategoryList = () => {
   // }, []);
   return (
     <div className='category-list'>
-      {categoryList.map((item) => {
-        return <CategoryCard name={item} />;
+      {categoryList.map((item, index) => {
+        return <CategoryCard key={index} name={item} />;
       })}
     </div>
   );

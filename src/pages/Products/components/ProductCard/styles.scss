@@ -15,7 +15,6 @@
   .product-card-img {
     width: 100%;
     aspect-ratio: 1 / 1;
-    // border: 1px solid red;
     background-color: white;
     border-radius: 12px;
     overflow: hidden;
@@ -39,5 +38,10 @@
     padding: 12px;
     border-radius: 12px;
     border: 1px solid black;
+
+    svg {
+      height: 24px;
+      width: 24px;
+    }
   }
 }
