@@ -2,6 +2,7 @@ import Header from '../Header';
 import { BrowserRouter } from 'react-router-dom';
 import Main from '../Main';
 import Footer from '../Footer';
+import { CartProvider } from '../../contexts/cartContext';
 
 import './styles.scss';
 
@@ -9,9 +10,11 @@ function App() {
   return (
     <BrowserRouter>
       <div className='app'>
-        <Header />
-        <Main />
-        <Footer />
+        <CartProvider>
+          <Header />
+          <Main />
+          <Footer />
+        </CartProvider>
       </div>
     </BrowserRouter>
   );
