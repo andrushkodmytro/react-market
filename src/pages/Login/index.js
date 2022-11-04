@@ -5,8 +5,6 @@ import store from 'store2';
 import auth from '../../utils/auth';
 import './styles.scss';
 
-const REACT_APP_API_URL = 'http://localhost:8081/api';
-
 export default function Login() {
   const onSubmit = (e) => {
     e.preventDefault();
@@ -16,7 +14,7 @@ export default function Login() {
     const data = { email: email.value, password: password.value };
 
     service
-      .post(`${REACT_APP_API_URL}/auth/login`, data)
+      .post('/auth/login', data)
       .then(function ({ data }) {
         console.log(data);
 

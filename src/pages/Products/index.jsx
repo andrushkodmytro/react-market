@@ -5,8 +5,6 @@ import { CartContext } from '../../contexts/cartContext';
 import axios from 'axios';
 import './styles.scss';
 
-const REACT_APP_API_URL = 'http://localhost:8081/api';
-
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [sort, setSort] = useState('asc');
@@ -15,7 +13,7 @@ const Products = () => {
 
   useEffect(() => {
     axios
-      .get(`${REACT_APP_API_URL}/products`)
+      .get('/products')
       .then(function ({ data }) {
         console.log(data);
         // if (data) {

@@ -8,11 +8,12 @@ import store from 'store2';
 // import { toast } from 'react-toastify';
 // import Auth from 'utils/auth'
 
+const REACT_APP_API_URL = 'http://localhost:8081/api';
 class Service {
   service;
 
   constructor() {
-    let service = axios.create();
+    let service = axios.create({ baseURL: REACT_APP_API_URL });
     service.defaults.headers.common.Accept = 'application/json';
     service.interceptors.request.use(this.handleRequestSuccess, this.handleRequestError);
 

@@ -4,8 +4,6 @@ import axios from 'axios';
 import auth from '../../utils/auth';
 import './styles.scss';
 
-const REACT_APP_API_URL = 'http://localhost:8081/api';
-
 export default function SignUp() {
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -15,7 +13,7 @@ export default function SignUp() {
     const data = { email: email.value, password: password.value, firstName: firstName.value, lastName: lastName.value };
 
     axios
-      .post(`${REACT_APP_API_URL}/auth/register`, data)
+      .post('/auth/register', data)
       .then(function ({ data }) {
         console.log(data);
       })
