@@ -35,11 +35,11 @@ class Auth {
   //   this.setSession(session);
   // };
 
-  // getUser = () => {
-  //   const session = store.get('auth');
-  //   const user = session && session.user;
-  //   return user || {};
-  // };
+  getUser = () => {
+    const session = store.get('auth');
+    const user = session && session.user;
+    return user || {};
+  };
 
   // setHeaders = (headers: any) => {
   //   const session = store.get('auth') || {};

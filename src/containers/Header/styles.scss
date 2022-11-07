@@ -28,13 +28,17 @@
       border-radius: 4px;
 
       &:hover {
-        background-color: darken($main-color, 10);
+        // background-color: darken($main-color, 10);
         cursor: pointer;
+        text-decoration: underline;
       }
     }
 
     .cart-container {
+      display: flex;
+      align-items: center;
       position: relative;
+      margin-right: 30px;
       svg path {
         fill: white;
       }
@@ -52,6 +56,10 @@
         font-size: 12px;
         font-weight: 600;
       }
+    }
+
+    .user-container {
+      // min-width: 200px;
     }
   }
 

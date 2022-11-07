@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import service from '../../api/services';
 import store from 'store2';
+import { UserContext } from 'contexts/userContext';
 import auth from '../../utils/auth';
+
 import './styles.scss';
 
 export default function Login() {
+  const { setUser } = useContext(UserContext);
   const onSubmit = (e) => {
     e.preventDefault();
 
@@ -16,14 +19,14 @@ export default function Login() {
     service
       .post('/auth/login', data)
       .then(function ({ data }) {
-        console.log(data);
-
         const auth = {
           user: data.user,
           token: data.token,
         };
 
         store.set('auth', auth);
+
+        setUser(data.user);
       })
       .catch(function (error) {
         console.log(error);

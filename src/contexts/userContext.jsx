@@ -1,27 +1,19 @@
 import { useEffect, useState, createContext } from 'react';
-import axios from 'axios';
+import auth from 'utils/auth';
 
-export const CartContext = createContext(null);
+export const UserContext = createContext(null);
 
-export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState({});
-
-  const getCart = async () => {
-    axios
-      .get('https://fakestoreapi.com/carts/1')
-      .then(function (response) {
-        setCart(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
+export const UserProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    getCart();
+    if (auth.isAuthenticated()) {
+      const localUser = auth.getUser();
+      localUser && setUser(localUser);
+    }
   }, []);
 
-  const contextValue = { cart };
+  const contextValue = { user, setUser };
 
-  return <CartContext.Provider value={contextValue}>{children}</CartContext.Provider>;
+  return <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>;
 };

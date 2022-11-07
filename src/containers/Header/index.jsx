@@ -1,9 +1,14 @@
 import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Container from '../Container';
 import { Link } from 'react-router-dom';
 import { CartContext } from '../../contexts/cartContext';
 import CartDialog from './components/CartDialog';
 import auth from 'utils/auth';
+import { UserContext } from 'contexts/userContext';
+import Menu from 'components/ui/Menu';
+import MenuItem from 'components/ui/MenuItem';
+import Button from 'components/ui/Button';
 import { ReactComponent as LogoIcon } from 'assets/icons/logo.svg';
 import { ReactComponent as CartIcon } from 'assets/icons/cart.svg';
 import { ReactComponent as UserIcon } from 'assets/icons/user.svg';
@@ -12,16 +17,44 @@ import './styles.scss';
 
 const Header = () => {
   const { cart } = useContext(CartContext);
+  const { user, setUser } = useContext(UserContext);
   const { date, id, products, userId } = cart;
-
+  console.log(user);
   const [open, setOpen] = useState(false);
-  console.log(open);
+
+  const [openAccount, setOpenAccount] = useState(false);
+  const navigate = useNavigate();
+
   const onCloseHandler = () => {
     setOpen(false);
   };
 
   const onOpenHandler = () => {
     setOpen(true);
+  };
+
+  const openAccountHandler = () => {
+    setOpenAccount((prev) => !prev);
+  };
+
+  const onCloseAccountHandler = () => {
+    setOpenAccount((prev) => !prev);
+  };
+
+  const onAccountHandler = () => {
+    navigate('/account');
+    setOpenAccount(false);
+  };
+
+  const onLogoutHandler = () => {
+    auth.removeSession();
+    setUser();
+    setOpenAccount(false);
+  };
+
+  const onLoginHandler = () => {
+    navigate('/login');
+    setOpenAccount(false);
   };
 
   return (
@@ -38,19 +71,32 @@ const Header = () => {
             <Link to='/products'>Products</Link>
           </li>
 
-          {auth.isAuthenticated() ? (
-            <div>
-              <LikeIcon />
-            </div>
-          ) : (
-            <div>
-              <UserIcon />
-            </div>
-          )}
-
           <div className='cart-container' onClick={onOpenHandler}>
             <span>{products?.length}</span>
             <CartIcon />
+          </div>
+
+          <div className='user-container'>
+            {user ? (
+              <>
+                <Button onClick={openAccountHandler}>
+                  <UserIcon />
+                </Button>
+                <Menu open={openAccount} onClose={onCloseAccountHandler}>
+                  <MenuItem onClick={onAccountHandler}>Account</MenuItem>
+                  <MenuItem onClick={onLogoutHandler}>Logout</MenuItem>
+                </Menu>
+              </>
+            ) : (
+              <>
+                <Button onClick={openAccountHandler}>
+                  <UserIcon />
+                </Button>
+                <Menu open={openAccount} onClose={onCloseAccountHandler}>
+                  <MenuItem onClick={onLoginHandler}>Login</MenuItem>
+                </Menu>
+              </>
+            )}
           </div>
         </ul>
 
