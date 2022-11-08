@@ -10,7 +10,6 @@ export default function Pagination({ page, limit, total, onPageChange, onLimitCh
     <div className='pagination'>
       <button>{'<'}</button>
       {[...new Array(pages).keys()].map((item, index) => {
-        console.log(item + 1);
         return (
           <button
             key={index}

@@ -44,7 +44,7 @@ export default function Login() {
         <input label='Password' placeholder='Password' name='password' />
 
         {/* <FormControlLabel control={<Checkbox value='remember' name='remember' color='primary' />} label='Remember me' /> */}
-        <button type='submit' fullWidth variant='contained' color='primary' size='large'>
+        <button type='submit' variant='contained' color='primary' size='large'>
           Submit
         </button>
 

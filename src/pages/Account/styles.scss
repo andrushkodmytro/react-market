@@ -1,0 +1,25 @@
+.account-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  form {
+    // background-color: gray;
+    // padding: 20px;
+    // border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+
+    input {
+      margin: 8px 0;
+      padding: 8px 12px;
+    }
+
+    button {
+      padding: 8px 12px;
+      border-radius: 8px;
+    }
+  }
+}

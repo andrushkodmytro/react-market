@@ -25,15 +25,16 @@ class Auth {
   //   }
   // };
 
-  // setSession = (authResult: any) => {
-  //   store.set('auth', authResult);
-  // };
+  setSession = (authResult) => {
+    store.set('auth', authResult);
+  };
 
-  // setUser = (data: any) => {
-  //   let session = store.get('auth');
-  //   session.user = { ...data };
-  //   this.setSession(session);
-  // };
+  setUser = (data = {}) => {
+    let session = store.get('auth');
+    debugger;
+    session.user = { ...session.user, ...data };
+    this.setSession(session);
+  };
 
   getUser = () => {
     const session = store.get('auth');

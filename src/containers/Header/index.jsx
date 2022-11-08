@@ -12,14 +12,18 @@ import Button from 'components/ui/Button';
 import { ReactComponent as LogoIcon } from 'assets/icons/logo.svg';
 import { ReactComponent as CartIcon } from 'assets/icons/cart.svg';
 import { ReactComponent as UserIcon } from 'assets/icons/user.svg';
-import { ReactComponent as LikeIcon } from 'assets/icons/like.svg';
+// import { ReactComponent as LikeIcon } from 'assets/icons/like.svg';
 import './styles.scss';
 
 const Header = () => {
   const { cart } = useContext(CartContext);
   const { user, setUser } = useContext(UserContext);
-  const { date, id, products, userId } = cart;
-  console.log(user);
+  const {
+    // date, id,
+    products,
+    //  userId
+  } = cart;
+
   const [open, setOpen] = useState(false);
 
   const [openAccount, setOpenAccount] = useState(false);

@@ -52,7 +52,7 @@ export default function SignUp() {
             /> */}
         {/* </div> */}
 
-        <button type='submit' fullWidth variant='contained' color='primary' size='large'>
+        <button type='submit' variant='contained' color='primary' size='large'>
           Sign Up
         </button>
         <div className='sign-up-page-links'>
