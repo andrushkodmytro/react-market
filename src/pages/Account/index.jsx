@@ -3,11 +3,12 @@ import Paper from 'components/ui/Paper';
 import { UserContext } from 'contexts/userContext';
 import services from 'api/services';
 import auth from 'utils/auth';
+import useToast from 'hooks/useToast';
 import './styles.scss';
 
 const Account = () => {
   const { user, setUser } = useContext(UserContext);
-  console.log(user);
+  const { addToast } = useToast();
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -15,18 +16,29 @@ const Account = () => {
     const { email, firstName, lastName } = e.target;
 
     const data = { firstName: firstName.value, lastName: lastName.value, email: email.value };
-    console.log(data);
 
     services
       .post('/account', data)
       .then(function ({ data }) {
         auth.setUser(data.user);
         setUser((prev) => ({ ...prev, ...data.user }));
+
+        addToast({ message: data.message, type: 'success' });
       })
       .catch(function (error) {
         // handle error
         console.log(error);
       });
+  };
+
+  const onSubmit2 = async (e) => {
+    e.preventDefault();
+
+    addToast({
+      message: 'Message ' + +new Date(),
+      type: 'success',
+      // action: hideToast,
+    });
   };
 
   return (
@@ -65,7 +77,7 @@ const Account = () => {
           </button>
         </form>
 
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit2}>
           <input
             type='password'
             required
