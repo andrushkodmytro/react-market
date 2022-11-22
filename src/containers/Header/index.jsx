@@ -18,11 +18,7 @@ import './styles.scss';
 const Header = () => {
   const { cart } = useContext(CartContext);
   const { user, setUser } = useContext(UserContext);
-  const {
-    // date, id,
-    products,
-    //  userId
-  } = cart;
+  const { products = [] } = cart;
 
   const [open, setOpen] = useState(false);
 
@@ -61,6 +57,10 @@ const Header = () => {
     setOpenAccount(false);
   };
 
+  const cartTotalCount = products.reduce((acc, curr) => {
+    return (acc += curr.quantity);
+  }, 0);
+
   return (
     <div className='app-header'>
       <Container className='app-header-container'>
@@ -76,7 +76,7 @@ const Header = () => {
           </li>
 
           <div className='cart-container' onClick={onOpenHandler}>
-            <span>{products?.length}</span>
+            <span>{cartTotalCount}</span>
             <CartIcon />
           </div>
 

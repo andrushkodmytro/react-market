@@ -1,36 +1,38 @@
-import { useEffect, useState, createContext } from 'react';
-import axios from 'axios';
+import { useEffect, useState, createContext, useContext } from 'react';
+import { UserContext } from 'contexts/userContext';
+import services from 'api/services';
 
 export const CartContext = createContext(null);
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState({});
 
+  const { user } = useContext(UserContext);
+
   const addToCart = async (productId) => {
-    axios
-      .put('https://fakestoreapi.com/carts/1', {
-        userId: 1,
-        date: '2022 - 09 - 20',
-        products: [...cart.products, { productId, quantity: 1 }],
-      })
-      .then(function (response) {
-        setCart(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    try {
+      const { data } = await services.post('/carts', { productId, quantity: 1, price: 500 });
+
+      setCart(data.data);
+    } catch (error) {
+    } finally {
+    }
   };
 
   const getCart = async () => {
-    axios
-      .get('https://fakestoreapi.com/carts/1')
-      .then(function (response) {
-        setCart(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    const { data } = await services.get('/carts');
+    setCart(data.data);
   };
+
+  const userBool = Boolean(user);
+
+  useEffect(() => {
+    if (userBool) {
+      getCart();
+    } else {
+      setCart({});
+    }
+  }, [userBool]);
 
   useEffect(() => {
     getCart();

@@ -1,15 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
 import services from 'api/services';
+import useToast from 'hooks/useToast';
 import './styles.scss';
 
 export default function ProductAdd() {
   const [categories, setCategories] = useState([]);
   const mounted = useRef(false);
 
+  const { addToast } = useToast();
+
   useEffect(() => {
     if (mounted.current) {
       services.get('/products/new').then(({ data }) => {
-        Array.isArray(JSON.parse(data)) && setCategories(JSON.parse(data));
+        Array.isArray(data) && setCategories(data);
       });
     }
 
@@ -29,7 +32,13 @@ export default function ProductAdd() {
       image: image.value,
     };
 
-    services.post('/products', data);
+    try {
+      services.post('/products', data);
+    } catch (error) {
+      addToast({ message: 'Error', type: 'error' });
+    } finally {
+      addToast({ message: 'New product added', type: 'success' });
+    }
   };
   console.log(categories);
   return (

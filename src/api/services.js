@@ -13,7 +13,7 @@ class Service {
   service;
 
   constructor() {
-    let service = axios.create({ baseURL: REACT_APP_API_URL });
+    let service = axios.create({ baseURL: REACT_APP_API_URL, transformResponse: (data) => JSON.parse(data) });
     service.defaults.headers.common.Accept = 'application/json';
     service.interceptors.request.use(this.handleRequestSuccess, this.handleRequestError);
 
@@ -101,7 +101,7 @@ class Service {
         responseType: 'json',
         transformResponse: [
           (data) => {
-            return data;
+            return JSON.parse(data);
           },
         ],
       })

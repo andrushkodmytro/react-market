@@ -1,7 +1,7 @@
 import React from 'react';
 import {} from './styles.scss';
 
-const LIMIT = [1, 2, 4];
+const LIMIT = [2, 4, 8];
 
 export default function Pagination({ page, limit, total, onPageChange, onLimitChange }) {
   const pages = Math.ceil(total / limit);

@@ -4,13 +4,13 @@ import Rating from '../Rating';
 import { ReactComponent as CheckIcon } from 'assets/icons/check-mark.svg';
 import './styles.scss';
 
-const ProductCard = ({ id, title, description, price, image, rating = { rate: 12 }, isOnCart, addToCart }) => {
+const ProductCard = ({ _id, title, description, price, image, rating = { rate: 12 }, isOnCart, addToCart }) => {
   const addToCartHandler = (e) => {
     e.preventDefault();
-    addToCart(id);
+    addToCart(_id);
   };
   return (
-    <Link className='product-card' to={`/products/${id}`}>
+    <Link className='product-card' to={`/products/${_id}`}>
       <div className='product-card-img'>
         <img src={image} alt='product' />
       </div>
