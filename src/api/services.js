@@ -99,11 +99,12 @@ class Service {
           return qs.stringify(params, { arrayFormat: 'brackets' });
         },
         responseType: 'json',
-        transformResponse: [
-          (data) => {
-            return JSON.parse(data);
-          },
-        ],
+        // transformResponse: [
+        //   (data) => {
+        //     debugger
+        //     return JSON.parse(data);
+        //   },
+        // ],
       })
       .then((response) => {
         return response;

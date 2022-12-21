@@ -1,26 +1,35 @@
 import React from 'react';
-import { Link, Navigate } from 'react-router-dom';
-import axios from 'axios';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
+import useToast from 'hooks/useToast';
+import services from 'api/services';
 import auth from '../../utils/auth';
 import './styles.scss';
 
 export default function SignUp() {
+  const navigate = useNavigate();
+  const { addToast } = useToast();
+
   const onSubmit = async (e) => {
     e.preventDefault();
 
     const { email, password, firstName, lastName } = e.target;
 
-    const data = { email: email.value, password: password.value, firstName: firstName.value, lastName: lastName.value };
+    const newUserData = {
+      email: email.value,
+      password: password.value,
+      firstName: firstName.value,
+      lastName: lastName.value,
+    };
 
-    axios
-      .post('/auth/register', data)
-      .then(function ({ data }) {
-        console.log(data);
-      })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-      });
+    try {
+      const data = await services.post('/auth/register', newUserData);
+
+      if (data.status === 201) {
+        navigate('/login');
+      }
+    } catch (error) {
+      addToast({ message: error?.message || 'Error', type: 'error' });
+    }
   };
 
   if (auth.isAuthenticated()) {

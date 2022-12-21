@@ -8,8 +8,10 @@ import ProductDetails from '../../pages/ProductDetails';
 import Login from '../../pages/Login';
 import SignUp from '../../pages/SignUp';
 import Account from '../../pages/Account';
+import UsersList from '../../pages/UsersList';
+import Orders from '../../pages/Orders';
+import Checkout from '../../pages/Checkout';
 import NotFound from '../../pages/NotFound';
-
 import './styles.scss';
 
 const Main = () => {
@@ -24,6 +26,9 @@ const Main = () => {
           <Route path='/login' element={<Login />}></Route>
           <Route path='/register' element={<SignUp />}></Route>
           <Route path='/account' element={<Account />}></Route>
+          <Route path='/users' element={<UsersList />}></Route>
+          <Route path='/orders' element={<Orders />}></Route>
+          <Route path='/checkout' element={<Checkout />}></Route>
           <Route path='*' element={<NotFound />}></Route>
         </Routes>
       </Container>

@@ -61,6 +61,8 @@ const Header = () => {
     return (acc += curr.quantity);
   }, 0);
 
+  const roles = user?.roles || [];
+
   return (
     <div className='app-header'>
       <Container className='app-header-container'>
@@ -75,8 +77,19 @@ const Header = () => {
             <Link to='/products'>Products</Link>
           </li>
 
+          {roles.includes('admin') && (
+            <>
+              <li>
+                <Link to='/users'>Users</Link>
+              </li>
+              <li>
+                <Link to='/orders'>Orders</Link>
+              </li>
+            </>
+          )}
+
           <div className='cart-container' onClick={onOpenHandler}>
-            <span>{cartTotalCount}</span>
+            {!!cartTotalCount && <span>{cartTotalCount}</span>}
             <CartIcon />
           </div>
 

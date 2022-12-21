@@ -1,4 +1,4 @@
-import { useEffect, useState, createContext, useContext } from 'react';
+import { useEffect, useState, createContext, useContext, useRef } from 'react';
 import { UserContext } from 'contexts/userContext';
 import services from 'api/services';
 
@@ -6,6 +6,8 @@ export const CartContext = createContext(null);
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState({});
+
+  const mounted = useRef(false);
 
   const { user } = useContext(UserContext);
 
@@ -26,19 +28,22 @@ export const CartProvider = ({ children }) => {
 
   const userBool = Boolean(user);
 
-  useEffect(() => {
-    if (userBool) {
-      getCart();
-    } else {
-      setCart({});
-    }
-  }, [userBool]);
+  // useEffect(() => {
+  //   if (userBool) {
+  //     getCart();
+  //   } else {
+  //     setCart({});
+  //   }
+  // }, [userBool]);
 
   useEffect(() => {
-    getCart();
+    if (mounted.current) {
+      getCart();
+    }
+    mounted.current = true;
   }, []);
 
-  const contextValue = { cart, addToCart };
+  const contextValue = { cart, addToCart, getCart };
 
   return <CartContext.Provider value={contextValue}>{children}</CartContext.Provider>;
 };

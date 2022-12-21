@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import './styles.scss';
 
 const x = [
@@ -68,6 +68,8 @@ const x = [
 const CartDialog = ({ cart, open, onClose }) => {
   const [products, setProducts] = useState([]);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (open) {
       document.body.style.overflowY = 'hidden';
@@ -80,31 +82,10 @@ const CartDialog = ({ cart, open, onClose }) => {
     };
   }, [open]);
 
-  useEffect(() => {
-    const url = `https://fakestoreapi.com/products`;
-
-    axios
-      .get(url)
-      .then(function ({ data }) {
-        if (data) {
-          const newArr = (cart.products || []).reduce((acc, cur) => {
-            const res = data.filter((item) => item.id === cur.productId);
-            if (res.length) {
-              return [...acc, { ...res[0], ...cur }];
-            } else {
-              return [...acc];
-            }
-          }, []);
-          setProducts(newArr);
-        }
-      })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-      });
-
-    return () => {};
-  }, []);
+  const checkoutHandler = () => {
+    navigate('/checkout');
+    onClose();
+  };
 
   if (!open) return null;
 
@@ -123,7 +104,7 @@ const CartDialog = ({ cart, open, onClose }) => {
         </div>
         <div className='dialog-content'>
           <div>
-            {(x || []).map(({ id, title, image, quantity, price }) => (
+            {(cart?.products || []).map(({ id, title, image, quantity, price }) => (
               <div key={id} className='cart-product-row'>
                 <div className='cart-product-row-remove-btn'>
                   <button>X</button>
@@ -144,7 +125,7 @@ const CartDialog = ({ cart, open, onClose }) => {
         </div>
         <div className='dialog-actions'>
           <span>Total: {total}</span>
-          <button>Buy</button>
+          <button onClick={checkoutHandler}>Buy</button>
         </div>
       </dialog>
     </div>

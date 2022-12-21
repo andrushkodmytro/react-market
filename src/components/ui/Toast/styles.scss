@@ -65,6 +65,10 @@
       background-color: #07bc0c;
     }
 
+    &.error {
+      background-color: red;
+    }
+
     &.info {
       border: #54c7ec solid 1px;
       background-color: #54c7ec;
