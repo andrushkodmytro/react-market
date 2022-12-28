@@ -9,6 +9,7 @@ import { UserContext } from 'contexts/userContext';
 import Menu from 'components/ui/Menu';
 import MenuItem from 'components/ui/MenuItem';
 import Button from 'components/ui/Button';
+import IconButton from 'components/ui/IconButton';
 import { ReactComponent as LogoIcon } from 'assets/icons/logo.svg';
 import { ReactComponent as CartIcon } from 'assets/icons/cart.svg';
 import { ReactComponent as UserIcon } from 'assets/icons/user.svg';
@@ -88,33 +89,37 @@ const Header = () => {
             </>
           )}
 
-          <div className='cart-container' onClick={onOpenHandler}>
-            {!!cartTotalCount && <span>{cartTotalCount}</span>}
-            <CartIcon />
-          </div>
+          <li>
+            <IconButton className='cart-container' size='large' onClick={onOpenHandler}>
+              {!!cartTotalCount && <span>{cartTotalCount}</span>}
+              <CartIcon style={{}} />
+            </IconButton>
+          </li>
 
-          <div className='user-container'>
-            {user ? (
-              <>
-                <Button onClick={openAccountHandler}>
-                  <UserIcon />
-                </Button>
-                <Menu open={openAccount} onClose={onCloseAccountHandler}>
-                  <MenuItem onClick={onAccountHandler}>Account</MenuItem>
-                  <MenuItem onClick={onLogoutHandler}>Logout</MenuItem>
-                </Menu>
-              </>
-            ) : (
-              <>
-                <Button onClick={openAccountHandler}>
-                  <UserIcon />
-                </Button>
-                <Menu open={openAccount} onClose={onCloseAccountHandler}>
-                  <MenuItem onClick={onLoginHandler}>Login</MenuItem>
-                </Menu>
-              </>
-            )}
-          </div>
+          <li>
+            <div className='user-container'>
+              {user ? (
+                <>
+                  <IconButton size='large' onClick={openAccountHandler}>
+                    <UserIcon />
+                  </IconButton>
+                  <Menu open={openAccount} onClose={onCloseAccountHandler}>
+                    <MenuItem onClick={onAccountHandler}>Account</MenuItem>
+                    <MenuItem onClick={onLogoutHandler}>Logout</MenuItem>
+                  </Menu>
+                </>
+              ) : (
+                <>
+                  <IconButton onClick={openAccountHandler}>
+                    <UserIcon styles={{ color: 'white' }} />
+                  </IconButton>
+                  <Menu open={openAccount} onClose={onCloseAccountHandler}>
+                    <MenuItem onClick={onLoginHandler}>Login</MenuItem>
+                  </Menu>
+                </>
+              )}
+            </div>
+          </li>
         </ul>
 
         <CartDialog cart={cart} open={open} onClose={onCloseHandler} />

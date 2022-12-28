@@ -11,6 +11,7 @@ import Account from '../../pages/Account';
 import UsersList from '../../pages/UsersList';
 import Orders from '../../pages/Orders';
 import Checkout from '../../pages/Checkout';
+import ComponentsPage from '../../pages/ComponentsPage';
 import NotFound from '../../pages/NotFound';
 import './styles.scss';
 
@@ -29,6 +30,8 @@ const Main = () => {
           <Route path='/users' element={<UsersList />}></Route>
           <Route path='/orders' element={<Orders />}></Route>
           <Route path='/checkout' element={<Checkout />}></Route>
+
+          <Route path='/components' element={<ComponentsPage />}></Route>
           <Route path='*' element={<NotFound />}></Route>
         </Routes>
       </Container>

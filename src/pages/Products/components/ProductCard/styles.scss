@@ -33,15 +33,8 @@
     font-weight: bold;
   }
 
-  .add-to-cart-btn {
-    cursor: pointer;
-    padding: 12px;
-    border-radius: 12px;
-    border: 1px solid black;
-
-    svg {
-      height: 24px;
-      width: 24px;
-    }
+  .bottom-row {
+    display: flex;
+    justify-content: space-between;
   }
 }

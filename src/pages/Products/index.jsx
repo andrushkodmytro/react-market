@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext, useMemo, useRef } from 'react';
-import Filters from './components//Filters';
+import Filters from './components/Filters';
 import ProductCard from './components/ProductCard';
 import { CartContext } from '../../contexts/cartContext';
 import services from 'api/services';
@@ -7,10 +7,16 @@ import Pagination from 'components/ui/Pagination';
 import Loader from 'components/ui/Loader';
 import './styles.scss';
 
+export const sortOptions = [
+  { label: 'Asc', value: 'asc' },
+  { label: 'Desc', value: 'desc' },
+];
+export const categoryOptions = [{ label: 'Jewelry', value: 'jewelry' }];
+
 const Products = () => {
   const [products, setProducts] = useState([]);
-  const [sort, setSort] = useState('asc');
-  const [category, setCategory] = useState(null);
+  const [sort, setSort] = useState(sortOptions[0]);
+  const [category, setCategory] = useState(categoryOptions[0]);
   const { cart, addToCart } = useContext(CartContext);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(8);
@@ -22,7 +28,7 @@ const Products = () => {
   const getProducts = async () => {
     try {
       setIsProductLoading(true);
-      const { data } = await services.get('/products', { page, limit });
+      const { data } = await services.get('/products', { page, limit, sortBy: 'name', orderBy: sort?.value });
 
       if (data) {
         const resData = data;
@@ -45,6 +51,18 @@ const Products = () => {
     mounted.current = true;
   }, [page, limit]);
 
+  // useEffect(() => {
+  //   if (mounted.current) {
+  //     if(page ===1){
+  //       getProducts();
+  //     } else {
+  //       setPage(1)
+  //     }
+  //   }
+
+  //   mounted.current = true;
+  // }, [sort]);
+
   const onPageChange = (e) => {
     setPage(+e.target.dataset.page);
   };
@@ -54,16 +72,31 @@ const Products = () => {
     setPage(1);
   };
 
+  const onSortChange = (selected) => {
+    setSort(selected);
+  };
+
+  const onCategoryChange = (selected) => {
+    setCategory(selected);
+  };
+
   const memoizedProducts = useMemo(() => {
     return products.map((item) => {
-      const isOnCart = !!(cart.products || []).find((item2) => item2.productId === item.id);
+      const isOnCart = !!(cart.products || []).find((item2) => item2.productId._id === item._id);
       return { ...item, isOnCart };
     });
   }, [products, cart]);
 
   return (
     <div className='inner-container'>
-      <Filters sort={sort} setSort={setSort} category={category} setCategory={setCategory} />
+      <Filters
+        sort={sort}
+        sortOptions={sortOptions}
+        onSortChange={onSortChange}
+        category={category}
+        categoryOptions={categoryOptions}
+        onCategoryChange={onCategoryChange}
+      />
 
       <div className='product-list'>
         {isProductLoading && <Loader />}

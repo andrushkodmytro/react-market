@@ -1,5 +1,7 @@
 .product-list-filters {
   padding: 20px 0;
+  display: flex;
+  gap: 20px;
 
   select {
     margin-right: 20px;
