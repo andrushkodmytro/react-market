@@ -1,0 +1,22 @@
+.loginPage {
+  display: flex;
+  justify-content: center;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .loginLinks {
+    display: flex;
+    justify-content: space-between;
+
+    a {
+      margin: 8px 0;
+    }
+  }
+}

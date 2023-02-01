@@ -1,7 +1,9 @@
 import React from 'react';
 import Button from 'components/ui/Button';
-// import TextField from 'components/ui/TextField';
+import TextField from 'components/ui/TextField';
 import Select from 'components/ui/Select';
+import Paper from 'components/ui/Paper';
+import styles from './styles.module.scss';
 
 const options = [
   { label: 'Account', value: 'account' },
@@ -11,20 +13,23 @@ const options = [
 
 const ComponentsPage = () => {
   return (
-    <div>
-      <h2>Buttons</h2>
+    <div className={styles.page}>
+      <Paper className={styles.paper}>
+        <h2>Buttons</h2>
 
-      {/* <Button variant='contained' color='primary' size='large'>
-        Button
-      </Button>
-      <Button variant='contained' color='secondary' size='large'>
-        Button
-      </Button>
-      <Button variant='contained' color='primary' size='large'>
-        Button
-      </Button> */}
+        <Button variant='contained' color='primary' size='large'>
+          Button
+        </Button>
+        <Button variant='contained' color='secondary' size='large'>
+          Button
+        </Button>
+        <Button variant='contained' color='primary' size='large'>
+          Button
+        </Button>
 
-      <Select style={{ marginTop: '20px' }} label='Select' options={options} />
+        <TextField label='Text field' />
+        <Select style={{ marginTop: '20px' }} label='Select' options={options} />
+      </Paper>
     </div>
   );
 };

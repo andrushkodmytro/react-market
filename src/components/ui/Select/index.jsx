@@ -7,7 +7,7 @@ import './styles.scss';
 
 const Select = ({ className, label, value: initValue, options, onChange, ...rest }) => {
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(initValue);
+  const [value, setValue] = useState(initValue || {});
 
   const setOpenHandler = () => {
     setOpen((prev) => !prev);

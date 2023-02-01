@@ -71,9 +71,9 @@ const Header = () => {
           <LogoIcon />
         </div>
         <ul className='app-nav-menu'>
-          <li>
+          {/* <li>
             <Link to='/'>Home</Link>
-          </li>
+          </li> */}
           <li>
             <Link to='/products'>Products</Link>
           </li>

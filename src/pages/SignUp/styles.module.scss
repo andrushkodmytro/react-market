@@ -1,0 +1,19 @@
+.signUp {
+  display: flex;
+  justify-content: center;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .links {
+    a {
+      margin: 8px 0;
+    }
+  }
+}
