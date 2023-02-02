@@ -5,6 +5,7 @@ import { CartContext } from '../../contexts/cartContext';
 import services from 'api/services';
 import Pagination from 'components/ui/Pagination';
 import Loader from 'components/ui/Loader';
+import Skeleton from 'components/ui/Skeleton';
 import './styles.scss';
 
 export const sortOptions = [
@@ -99,7 +100,13 @@ const Products = () => {
       />
 
       <div className='product-list'>
-        {isProductLoading && <Loader />}
+        {isProductLoading && (
+          <>
+            {Array.of(1, 2, 3, 4).map((item) => (
+              <Skeleton style={{ height: '415px' }} />
+            ))}
+          </>
+        )}
         {memoizedProducts.map((product) => {
           return <ProductCard key={product._id} {...product} isOnCart={product.isOnCart} addToCart={addToCart} />;
         })}

@@ -1,0 +1,29 @@
+.skeleton {
+  background-color: rgba(0, 0, 0, 0.11);
+  animation: animation 1.5s ease-in-out 0.5s infinite;
+  border-radius: 4px;
+
+  &.text {
+    display: block;
+    &:before {
+      content: '\00a0';
+    }
+  }
+
+  &.rounded {
+    display: block;
+  }
+}
+
+@keyframes animation {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
+  }
+}

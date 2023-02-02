@@ -1,12 +1,19 @@
 .product-details {
   display: flex;
 
+  .img-container {
+    width: 400px;
+    height: 400px;
+  }
+
   .product-details-img-container {
     width: 400px;
     height: 400px;
     background-color: white;
     border-radius: 12px;
     flex-shrink: 0;
+    border: 1px solid gray;
+    overflow: hidden;
 
     img {
       width: 100%;
@@ -17,18 +24,30 @@
 
   .product-details-content {
     padding: 0 24px;
+    width: 100%;
+    max-width: 500px;
 
     .product-details-title {
-      font-size: 32px;
+      margin-bottom: 20px;
     }
 
     .product-details-description {
-      font-size: 20px;
+      margin-bottom: 20px;
     }
 
     .product-details-price {
       font-size: 30px;
       font-weight: 500;
+      // margin-right: 20px;
     }
+  }
+
+  .product-details-price-block {
+    display: flex;
+    gap: 20px;
+  }
+
+  @media screen and (max-width: 900px) {
+    flex-direction: column;
   }
 }
