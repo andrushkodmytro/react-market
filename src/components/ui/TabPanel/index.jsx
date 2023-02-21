@@ -3,7 +3,7 @@ import './styles.scss';
 
 const TabPanel = ({ className, children, value = 0, index, label, ...rest }) => {
   return (
-    <div className={`tab-panel ${className ? className : ''}`} {...rest}>
+    <div className={`tab-panel ${className ? className : ''} ${value === index ? 'tab-panel-active' : ''}`} {...rest}>
       {value === index ? children : null}
     </div>
   );

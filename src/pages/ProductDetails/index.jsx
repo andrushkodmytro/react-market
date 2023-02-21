@@ -12,7 +12,18 @@ import { ReactComponent as CartIcon } from 'assets/icons/cart2.svg';
 import { ReactComponent as FavoriteBorderIcon } from 'assets/icons/favorite-border.svg';
 import { ReactComponent as FavoriteIcon } from 'assets/icons/favorite.svg';
 import TabPanel from 'components/ui/TabPanel';
-import './styles.scss';
+import Comment from 'components/Comment';
+import styles from './styles.module.scss';
+
+const x = {
+  user: 'test user',
+  date: '2022-01-01',
+  description: 'rewfrwe fre f er fer f er f re f er fer  fer f er ',
+  positiveText: 'r fre f re fre f ',
+  negativeText: 'ff f erf er fre f er fe',
+};
+
+const arr = [x, x, x];
 
 const ProductDetails = () => {
   const [productData, setProductData] = useState({});
@@ -22,7 +33,6 @@ const ProductDetails = () => {
   const mounted = useRef(false);
   let { productId } = useParams();
 
-  console.log(productData);
   useEffect(() => {
     const getProductData = async () => {
       try {
@@ -56,28 +66,28 @@ const ProductDetails = () => {
   };
 
   return (
-    <div className='product-details'>
-      <div className='img-container'>
+    <div className={styles.productDetails}>
+      <div className={styles.imgContainer}>
         {isProductLoading ? (
           <Skeleton variant='rounded' style={{ width: '100%', height: '100%' }} />
         ) : (
-          <div className='product-details-img-container'>
+          <div className={styles.productDetailsImgContainer}>
             <img src={productData.image} alt='Product' />
           </div>
         )}
       </div>
 
-      <div className='product-details-content'>
-        <Typography variant='h4' component='h1' className='product-details-title'>
+      <div className={styles.productDetailsContent}>
+        <Typography variant='h4' component='h1' className={styles.productDetailsTitle}>
           {isProductLoading ? <Skeleton style={{ width: '100%' }} /> : <>{productData.name}</>}
         </Typography>
 
-        <div className='product-details-price-block'>
-          <Typography variant='body1' className='product-details-price'>
+        <div className={styles.productDetailsPriceBlock}>
+          <Typography variant='body1' className={styles.productDetailsPrice}>
             {isProductLoading ? <Skeleton style={{ width: '80px' }} /> : <>{productData.price}$</>}
           </Typography>
 
-          <Button className={'toast-close-btn'} startIcon={CartIcon} onClick={() => {}}>
+          <Button className={styles.toastCloseBtn} startIcon={CartIcon} onClick={() => {}}>
             Buy
           </Button>
 
@@ -112,7 +122,11 @@ const ProductDetails = () => {
         </TabPanel>
 
         <TabPanel value={tab} index={1}>
-          Tab 2
+          <ul className={styles.commentList}>
+            {arr.map((item) => {
+              return <Comment {...item} />;
+            })}
+          </ul>
         </TabPanel>
 
         {/* <p>

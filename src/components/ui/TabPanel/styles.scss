@@ -1,3 +1,5 @@
 .tab-panel {
-  padding: 24px;
+  &.tab-panel-active {
+    padding: 24px;
+  }
 }

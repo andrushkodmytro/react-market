@@ -1,0 +1,29 @@
+.commentContainer {
+  border: 1px solid gray;
+  border-radius: 4px;
+
+  .commentHeader {
+    border-bottom: 1px solid gray;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+
+    .userBlock {
+      display: flex;
+      gap: 10px;
+    }
+
+    .commentDate {
+      color: lightgray;
+    }
+  }
+
+  .commentContent {
+    padding: 10px;
+  }
+
+  .commentFooter {
+    padding: 10px;
+  }
+}
