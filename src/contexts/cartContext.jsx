@@ -33,6 +33,10 @@ export const CartProvider = ({ children }) => {
     setCart(data.data);
   };
 
+  const clearCart = async () => {
+    setCart({});
+  };
+
   useEffect(() => {
     if (mounted.current) {
       getCart();
@@ -40,7 +44,7 @@ export const CartProvider = ({ children }) => {
     mounted.current = true;
   }, []);
 
-  const contextValue = { cart, addToCart, getCart, removeFromCart };
+  const contextValue = { cart, addToCart, getCart, removeFromCart, clearCart };
 
   return <CartContext.Provider value={contextValue}>{children}</CartContext.Provider>;
 };

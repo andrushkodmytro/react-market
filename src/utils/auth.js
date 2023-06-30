@@ -3,7 +3,8 @@ import store from 'store2';
 class Auth {
   isAuthenticated = () => {
     const session = store.get('auth');
-    return !!session && new Date().getTime() < session.user.expiry;
+
+    return !!session && new Date().getTime() / 1000 < session.expiresIn;
   };
 
   removeSession = () => {
@@ -31,7 +32,6 @@ class Auth {
 
   setUser = (data = {}) => {
     let session = store.get('auth');
-    debugger;
     session.user = { ...session.user, ...data };
     this.setSession(session);
   };
@@ -46,14 +46,6 @@ class Auth {
   //   const session = store.get('auth') || {};
   //   session.headers = { ...headers };
   //   this.setSession(session);
-  // };
-
-  // setTemporarySession = (authResult: any) => {
-  //   store.set('temporarySession', authResult);
-  // };
-
-  // removeTemporarySession = () => {
-  //   store.remove('temporarySession');
   // };
 }
 

@@ -3,6 +3,7 @@ import { Link, Navigate } from 'react-router-dom';
 import service from '../../api/services';
 import store from 'store2';
 import { UserContext } from 'contexts/userContext';
+import { CartContext } from 'contexts/cartContext';
 import Paper from 'components/ui/Paper';
 import TextField from 'components/ui/TextField';
 import Typography from 'components/ui/Typography';
@@ -13,6 +14,7 @@ import styles from './styles.module.scss';
 
 export default function Login() {
   const { setUser } = useContext(UserContext);
+  const { getCart } = useContext(CartContext);
   const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = async (e) => {
@@ -27,22 +29,24 @@ export default function Login() {
     const data = { email: email.value, password: password.value };
 
     try {
-      const { data: resData } = await service.post('/auth/login', data);
+      const { data: resData } = await service.post('/users/login', data);
       const auth = {
         user: resData.user,
         token: resData.token,
+        expiresIn: resData.expiresIn,
       };
 
       store.set('auth', auth);
 
       setUser(resData.user);
+      getCart();
     } catch (error) {
       console.log(error);
     } finally {
       setIsLoading(false);
     }
   };
-
+  console.log(auth.isAuthenticated());
   if (auth.isAuthenticated()) {
     return <Navigate replace to='/' />;
   }

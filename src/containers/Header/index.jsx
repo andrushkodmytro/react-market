@@ -10,6 +10,7 @@ import Menu from 'components/ui/Menu';
 import MenuItem from 'components/ui/MenuItem';
 import Button from 'components/ui/Button';
 import IconButton from 'components/ui/IconButton';
+import service from '../../api/services';
 import { ReactComponent as LogoIcon } from 'assets/icons/logo.svg';
 import { ReactComponent as CartIcon } from 'assets/icons/cart.svg';
 import { ReactComponent as UserIcon } from 'assets/icons/user.svg';
@@ -17,7 +18,7 @@ import { ReactComponent as UserIcon } from 'assets/icons/user.svg';
 import './styles.scss';
 
 const Header = () => {
-  const { cart } = useContext(CartContext);
+  const { cart, clearCart } = useContext(CartContext);
   const { user, setUser } = useContext(UserContext);
   const { products = [] } = cart;
 
@@ -47,10 +48,17 @@ const Header = () => {
     setOpenAccount(false);
   };
 
-  const onLogoutHandler = () => {
-    auth.removeSession();
-    setUser();
-    setOpenAccount(false);
+  const onLogoutHandler = async () => {
+    try {
+      await service.get('/users/logout');
+      auth.removeSession();
+      setUser();
+      setOpenAccount(false);
+      clearCart();
+    } catch (error) {
+      console.log(error);
+    } finally {
+    }
   };
 
   const onLoginHandler = () => {
